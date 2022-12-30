@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/mystylesheet.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel='icon' href='/ic_launcher_round.png' />
+  <title>My Inventory</title>
+  <script type="text/javascript" src="dist/jquery.tabledit.js"></script>
+  <script type="text/javascript" src="js/loadandsetimage.js"></script>
+</head>
+
+<body class="container-fluid">
+
+  <a href="#bottom" id="myBtn" title="Go to top">Add New Item</a>
+  <script>
+    document.getElementById("myBtn").style.display = "block";
+  </script>
+
+  <div class="container-fluid" style="min-height:200px;">
+    <div class=''>
+    </div>
+    <div class="container-fluid home">
+      <h2>My Inventory</h2>
+      <table id="data_table" class="table table-striped" style="border:">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Entry Date</th>
+            <th>Details</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Image Link</th>
+            <th>Delete Item</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          ##% table %##
+
+
+
+        </tbody>
+        <script type="text/javascript" src="js/deleteitem.js"></script>
+      </table>
+    </div>
+    <script type="text/javascript" src="custom_table_edit.js"></script>
+  </div>
+
+  <div class="container-fluid add_data" id="bottom">
+
+    <p style="font-size: 1.875em;">Add New Items From Here</p>
+
+    <form action="/additemweb.php" method="post" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="productId">Product Id:</label>
+        <input type="text" class="form-control" id="productId" name="productId">
+      </div>
+
+
+      <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input type="text" class="form-control" id="productName" name="productName">
+      </div>
+
+
+      <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" class="form-control" id="brand" name="brand">
+      </div>
+
+
+      <div class="form-group">
+        <label for="date">Entry Date:</label>
+        <input type="date" class="form-control" id="date" name="date">
+      </div>
+
+      <div class="form-group">
+        <label for="details">Details:</label>
+        <input type="text" class="form-control" id="details" name="details">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="text" class="form-control" id="price" name="price">
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="text" class="form-control" id="quantity" name="quantity">
+      </div>
+
+      <div class="form-group">
+        <label for="upload">Image:</label><br>
+        <img style="background-color: #d4d4d6;" id="upload" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/City-No-Camera-icon.png" height="70" width="70" alt="Image preview..."><br><br>
+        <input type="file" name="image" id="fileToUpload" accept=".jpg" onchange="previewFile()">
+      </div>
+
+      <br><br>
+
+      <input class="submit_button" type="submit" value="Save Data" name="submit">
+    </form>
+
+
+
+  </div>
+</body>
+
+</html>

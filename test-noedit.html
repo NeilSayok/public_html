@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Inventory</title>
+  <link rel='icon' href='/ic_launcher_round.png' />
+
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    #myBtn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #f46242;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+.add_data{
+    border: 3px solid #ff2828;
+    padding: 8px;
+    margin-top: 25px;
+}
+.submit_button{
+    width: 100%;
+    height: 50px;
+    background-color: coral;
+    color: white;
+    font-size: 1.875em;
+}
+
+  .right {
+    position: absolute;
+    right: 20px;
+    border: 3px solid #73AD21;
+    padding: 10px;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #e8e8e8;
+  }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+
+    function previewFile() {
+    var preview = document.querySelector('#upload');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  document.getElementById("demo").innerHTML = previewFile();
+</script>
+
+</head>
+
+<body>
+
+  <a href="#bottom" id="myBtn" title="Go to top">Add New Item</a>
+  <script>
+    document.getElementById("myBtn").style.display = "block";
+</script>
+
+  <div class="div_pos">
+    <h2>My Inventory</h2>
+  </div>
+
+
+
+
+  <div class="div_pos">
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Brand</th>
+        <th>Entry Date</th>
+        <th>Details</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Image Link</th>
+        <th>Delete Item</th>
+      </tr>
+      ##% table %##
+    </table>
+
+    <script>
+      $(".del-item").click(function(e) {
+           $(this).closest('tr').remove()
+           var $row = $(this).closest("tr"),
+             $tds = $row.find("td:nth-child(1)");
+
+           $.each($tds, function() {
+             console.log($(this).text());
+             $.ajax({
+               data: 'key_id=' + $(this).text(),
+               url: 'https://inventorymanagement-system.000webhostapp.com/deleteItem.php',
+               method: 'POST', // or GET
+               success: function(msg) {
+                 alert(msg);
+               }
+             });
+
+           });
+
+         });
+
+     </script>
+
+  </div>
+
+  <div id="bottom" class="add_data">
+
+    <p style="font-size: 1.875em;">Add New Items From Here</p>
+
+    <form action="/additemweb.php" method="post" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="productId">Product Id:</label>
+        <input type="text" class="form-control" id="productId" name="productId">
+      </div>
+
+
+      <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input type="text" class="form-control" id="productName" name="productName">
+      </div>
+
+
+      <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" class="form-control" id="brand" name="brand">
+      </div>
+
+
+      <div class="form-group">
+        <label for="date">Entry Date:</label>
+        <input type="text" class="form-control" id="date" name="date">
+      </div>
+
+      <div class="form-group">
+        <label for="details">Details:</label>
+        <input type="text" class="form-control" id="details" name="details">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="text" class="form-control" id="price" name="price">
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="text" class="form-control" id="quantity" name="quantity">
+      </div>
+
+      <div class="form-group">
+        <label for="upload">Image:</label><br>
+        <img style="background-color: #d4d4d6;" id="upload" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/City-No-Camera-icon.png" height="70" width="70" alt="Image preview..."><br><br>
+        <input type="file" name="image" id="fileToUpload" accept=".jpg" onchange="previewFile()">
+      </div>
+
+      <br><br>
+
+      <input class="submit_button" type="submit" value="Save Data" name="submit">
+    </form>
+
+
+
+  </div>
+
+</body>
+
+</html>
